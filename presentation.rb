@@ -42,24 +42,27 @@ presentation 'concert_curator_presentation' do
 #Hand off to Seph
 
   slide "About the code" do
-
+    image "cat_coding.gif"
     #hackery gif here
 
   end
 
   slide "Technologies Used" do
-    point "Rails"
-    point "Bootstrap"
-    point "Three APIs:"
     list do
-      point "Seatgeek API for concert data"
-      point "Google Maps API for maps"
-      point "YouTube API to find a video"
+      point "Rails"
+      point "Bootstrap"
+      #plus three api's
+      point "Seatgeek API" #for concert data
+      point "Google Maps API" #for concert data
+      point "YouTube API" # to find a video
     end
   end
 
-  slide "Code Challenge 1: Find Similar Genre" do
-    point "Find a show with a genre that matches a genre in the current show"
+  slide "Challenge 1: Find Similar Genre" do
+    point "Take a genre (or several)"
+    point "Select shows with any artists whose genres overlap"
+    image "genre_button.png"
+
     #image of this button from the front page
   end
 
@@ -74,38 +77,63 @@ presentation 'concert_curator_presentation' do
 
 
   slide "Refactor:" do
-    point "Much faster!"
     code(:ruby) do
       "refactor.rb"
     end
-    point "Use 'join' and 'where' to let SQL do the heavy lifting"
+    point "Let SQL do the heavy lifting"
+    point "Much faster!"
   end
 
 
-  slide "Code Challenge 2: Loading a map" do
+  slide "Challenge 2: Loading a Map" do
     point "First pass:"
-    # code(:ruby) do
-    #   "map_first.rb"  
-    # end
+    code(:javascript) do
+      "map_first.js"  
+    end
   end
 
   slide "The bug" do
-    point "Would only show map after refresh"
-    point "But this code is supposed to be called automatically when the page loads!"
-    # code(:ruby) do
-    #   "map_first_detail.rb"
-    # end
+    point "Only showed map after refresh"
+    point "Why won't this run when the page loads!?"
+    code(:javascript) do
+      "map_first_detail.js"
+    end
   end
   
   slide "The hitch: Turbolinks" do
-    point "Would only show map after refresh"
-    point "But this code is supposed to be called automatically when the page loads!"
-    # code(:ruby) do
-    #   "map_first_detail.rb"
-    # end
+    point "Turbolinks loads the page without really 'loading' the 'page'"
+    point "Uses AJAX to swap in a new body"
   end
 
-  # slide "Next Steps" do
-  # end
+  slide "The fix:" do
+    code(:javascript) do
+      "map_fix_detail.js"
+    end
+    point "Have to hook into 'page:load' event"
+    # a turbolinks event, along with more standard window load event
+  end
+
+  slide "Wishlist" do
+    point "Spruce up the data"
+    list do 
+      point "Fill in sparse categories like prices"
+      # also more genres, more venues"
+      point "Add more categories like artist reviews and websites"
+      # age restrictions, ticket links
+    end
+  end
+
+  slide "Wishlist" do
+    point "Do more with APIs"
+    list do 
+      point "More map functionality"
+      #directions, label
+      point "Smarter youtube querying"
+      #if first result is an error, retry. weed out irrelevant results.
+    end
+  end
+
+  slide "Questions?" do
+  end
 
 end

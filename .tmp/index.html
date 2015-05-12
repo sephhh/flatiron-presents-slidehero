@@ -46,29 +46,33 @@
 </section><section data-transition="default">
   <h2>About the code</h2>
   
+    <img class="stretch" src="images/cat_coding.gif" alt="">
+  
 </section><section data-transition="default">
   <h2>Technologies Used</h2>
   
-    <p>Rails</p>
-  
-    <p>Bootstrap</p>
-  
-    <p>Three APIs:</p>
-  
     <ul> 
   
-    <li>Seatgeek API for concert data</li>
+    <li>Rails</li>
   
-    <li>Google Maps API for maps</li>
+    <li>Bootstrap</li>
   
-    <li>YouTube API to find a video</li>
+    <li>Seatgeek API</li>
+  
+    <li>Google Maps API</li>
+  
+    <li>YouTube API</li>
   
 </ul>
   
 </section><section data-transition="default">
-  <h2>Code Challenge 1: Find Similar Genre</h2>
+  <h2>Challenge 1: Find Similar Genre</h2>
   
-    <p>Find a show with a genre that matches a genre in the current show</p>
+    <p>Take a genre (or several)</p>
+  
+    <p>Select shows with any artists whose genres overlap</p>
+  
+    <img class="stretch" src="images/genre_button.png" alt="">
   
 </section><section data-transition="default">
   <h2>First pass:</h2>
@@ -90,8 +94,6 @@ end
 </section><section data-transition="default">
   <h2>Refactor:</h2>
   
-    <p>Much faster!</p>
-  
     <pre><code data-trim class="ruby">
   # Inside the Event model
 def self.find_similar_shows(genre_id)
@@ -99,26 +101,91 @@ def self.find_similar_shows(genre_id)
 end
 </code></pre>
   
-    <p>Use 'join' and 'where' to let SQL do the heavy lifting</p>
+    <p>Let SQL do the heavy lifting</p>
+  
+    <p>Much faster!</p>
   
 </section><section data-transition="default">
-  <h2>Code Challenge 2: Loading a map</h2>
+  <h2>Challenge 2: Loading a Map</h2>
   
     <p>First pass:</p>
+  
+    <pre><code data-trim class="javascript">
+  function initialize() {
+  var myLatlng = //grab lat-long of current venue
+  var my_venue = //grab the venue name
+  var mapOptions = {
+    //map options here
+  };
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+  var marker = new google.maps.Marker({
+  position: myLatlng,
+  map: map,
+  title: my_venue
+  });
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</code></pre>
   
 </section><section data-transition="default">
   <h2>The bug</h2>
   
-    <p>Would only show map after refresh</p>
+    <p>Only showed map after refresh</p>
   
-    <p>But this code is supposed to be called automatically when the page loads!</p>
+    <p>Why won't this run when the page loads!?</p>
+  
+    <pre><code data-trim class="javascript">
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+</code></pre>
   
 </section><section data-transition="default">
   <h2>The hitch: Turbolinks</h2>
   
-    <p>Would only show map after refresh</p>
+    <p>Turbolinks loads the page without really 'loading' the 'page'</p>
   
-    <p>But this code is supposed to be called automatically when the page loads!</p>
+    <p>Uses AJAX to swap in a new body</p>
+  
+</section><section data-transition="default">
+  <h2>The fix:</h2>
+  
+    <pre><code data-trim class="javascript">
+  google.maps.event.addDomListener(window, 'load', initialize);
+google.maps.event.addDomListener(window, 'page:load', initialize);
+
+</code></pre>
+  
+    <p>Have to hook into 'page:load' event</p>
+  
+</section><section data-transition="default">
+  <h2>Wishlist</h2>
+  
+    <p>Spruce up the data</p>
+  
+    <ul> 
+  
+    <li>Fill in sparse categories like prices</li>
+  
+    <li>Add more categories like artist reviews and websites</li>
+  
+</ul>
+  
+</section><section data-transition="default">
+  <h2>Wishlist</h2>
+  
+    <p>Do more with APIs</p>
+  
+    <ul> 
+  
+    <li>More map functionality</li>
+  
+    <li>Smarter youtube querying</li>
+  
+</ul>
+  
+</section><section data-transition="default">
+  <h2>Questions?</h2>
   
 </section>
       </div>
