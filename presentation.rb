@@ -21,13 +21,12 @@ presentation 'concert_curator_presentation' do
   end
 
   slide "Problem" do
-    point "Simple way to find and browse through concerts in NY"
-    point "maybe one more point here?"
+    point "When it comes to concerts/events in NYC", animation: "step"
+    point "INFORMATION OVERLOAD", animation: "grow", animation: "step" 
   end
 
   slide "ConcertCurator" do
-    point "Lists upcoming shows in NY"
-    point "Gives you helpful ways to browse"
+    point "A fun and helpful app that serves-up the musical means to plan the perfect night", animation: "step"
   end
 
   slide "Demo" do
